@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Top画面</h1>
+
+    <button type="button" onclick="location.href='/result'">Result画面</button>
+    <br>このページにアクセスした際、javascriptでユーザのブラウザなどの情報を保持
+    <br>"Result画面"ボタンを押下で、保持している情報をサーバにpostする
+    <br><br>
+    <button type="button" onclick="location.href='/admin'">adminページ</button>
+{% endblock %}
