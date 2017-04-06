@@ -41,6 +41,10 @@ function shockwave_flash(description) {
     return description.match(/\d+\.\d+/)[0];
 }
 
+function widevine_content_decryption_module(description) {
+    return description.match(/\d+\.\d+\.\d+\.\d+/)[0]; // 1.4.8.962
+}
+
 // データのPOST送信機能
 /*
  [reference] http://fujiiyuuki.blogspot.jp/2010/09/formjspost.html
