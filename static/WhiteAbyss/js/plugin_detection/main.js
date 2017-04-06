@@ -1,19 +1,18 @@
 // プラグインに対応するバージョンチェック関数をペアで登録しておく
 var VERSION_CHECK_FUNCTION_MAP = {
     "Shockwave Flash": shockwave_flash
-    }
-    
-function main() {
+}
+
+function get_plugins() {
     var plugin_info_array = [];
     for(var i=0; i<navigator.plugins.length; i++) {
         var plugin = navigator.plugins[i];
         var plugin_info = extractPluginInfo(plugin);
         plugin_info_array.push(plugin_info);
     }
-        var result = JSON.stringify(plugin_info_array);
-        document.write(result);
-        execPost('./debug_page.html', result);
-}    
+    var result = JSON.stringify(plugin_info_array);
+    execPost("/result" , result);
+}
 
 // プラグインの情報からバージョン情報を抽出して、辞書型で返す
 function extractPluginInfo(pluginObj) {
@@ -38,7 +37,7 @@ function extractPluginInfo(pluginObj) {
 }
 
 // バージョンチェック関数群
-function shockwave_flash(description) { 
+function shockwave_flash(description) {
     return description.match(/\d+\.\d+/)[0];
 }
 
@@ -64,6 +63,3 @@ function execPost(action, data) {
     // submit
     form.submit();
 }
-
-// MAIN
-main();

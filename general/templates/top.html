@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block content %}
     <h1>Top画面</h1>
 
-    <button type="button" onclick="location.href='/result'">Result画面</button>
-    <br>このページにアクセスした際、javascriptでユーザのブラウザなどの情報を保持
-    <br>"Result画面"ボタンを押下で、保持している情報をサーバにpostする
-    <br><br>
     <button type="button" onclick="location.href='/admin'">adminページ</button>
+
+    <br><br>
+    djangoにpostする<br>
+    <button type="submit" value="main" onclick="get_plugins()">診断</button>
+
+    <script type="text/javascript" src="{% static 'WhiteAbyss/js/plugin_detection/main.js' %}"></script>
 {% endblock %}
