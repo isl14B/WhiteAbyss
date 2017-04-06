@@ -1,6 +1,7 @@
 // プラグインに対応するバージョンチェック関数をペアで登録しておく
 var VERSION_CHECK_FUNCTION_MAP = {
-    "Shockwave Flash": shockwave_flash
+    "Shockwave Flash": shockwave_flash,
+    "Widevine Content Decryption Module": widevine_content_decryption_module
     }
     
 function main() {
@@ -40,6 +41,10 @@ function extractPluginInfo(pluginObj) {
 // バージョンチェック関数群
 function shockwave_flash(description) { 
     return description.match(/\d+\.\d+/)[0];
+}
+
+function widevine_content_decryption_module(description) {
+    return description.match(/\d+\.\d+\.\d+\.\d+/)[0]; // 1.4.8.962
 }
 
 // データのPOST送信機能
