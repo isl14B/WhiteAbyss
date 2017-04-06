@@ -3,5 +3,10 @@
 {% block content %}
     <h1>Result画面</h1>
 
-    結果を表示
+    結果を表示<br><br>
+
+    {% for name, version in l_plugins %}
+        [{{ name }}, {{ version }}]<br>
+    {% endfor %}
+
 {% endblock %}
