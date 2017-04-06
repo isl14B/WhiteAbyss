@@ -1,6 +1,7 @@
 // プラグインに対応するバージョンチェック関数をペアで登録しておく
 var VERSION_CHECK_FUNCTION_MAP = {
-    "Shockwave Flash": shockwave_flash
+    "Shockwave Flash": shockwave_flash,
+    "Widevine Content Decryption Module": widevine_content_decryption_module
 }
 
 function get_plugins() {
