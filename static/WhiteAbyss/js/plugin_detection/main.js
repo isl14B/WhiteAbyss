@@ -23,9 +23,9 @@ function extractPluginInfo(pluginObj) {
     plugin_version = ""
 
     // デバッグ用----------------------------------------------------------------------------------------
-    document.write(plugin_name + "<br>");
-    document.write(plugin_description+ "<br>");
-    document.write("-----------------------------<br>");
+    // document.write(plugin_name + "<br>");
+    // document.write(plugin_description+ "<br>");
+    // document.write("-----------------------------<br>");
     //----------------------------------------------------------------------------------------------------
 
     try {
