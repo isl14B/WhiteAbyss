@@ -2,6 +2,17 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import json
+import subprocess
+
+SEARCHSPLOIT_PATH = "/opt/exploit-database/searchsploit"
+
+
+def search(plugin_name):
+    cmd = "{} -j {}".format(SEARCHSPLOIT_PATH, plugin_name)
+
+    p = subprocess.run(cmd.split(), stdout=subprocess.PIPE)
+    result = p.stdout.decode('utf-8')
+    return result
 
 
 class TopView(generic.TemplateView):
@@ -17,20 +28,25 @@ class ResultView(generic.TemplateView):
         datas = json.loads(request.POST.get("plugin_info"))
         l_name = []
         l_version = []
+        l_result = []
 
         for data in datas:
             for key, value in data.items():
                 if key == "name":
-                    print(value)
                     l_name.append(value)
                 elif key == "version":
-                    print(value)
                     l_version.append(value)
                 else:
-                    print("error")
-            print("")
+                    print("<!> error: data")
 
-        context['l_plugins'] = zip(l_name, l_version)
+        for name in l_name:
+            try:
+                result = json.loads(search(name))
+                l_result.append(result.get("RESULTS"))
+            except:
+                print("<!> error: searchsploit")
+
+        context['l_plugins'] = zip(l_name, l_version, l_result)
         return self.render_to_response(context)
 
     @method_decorator(csrf_exempt)
