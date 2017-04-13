@@ -5,8 +5,11 @@
 
     結果を表示<br><br>
 
-    {% for name, version in l_plugins %}
+    {% for name, version, result in l_plugins %}
         [{{ name }}, {{ version }}]<br>
+        result = {{ result }}<br>
+
+        <br>
     {% endfor %}
 
 {% endblock %}
