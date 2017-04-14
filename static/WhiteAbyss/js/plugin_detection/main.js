@@ -2,7 +2,7 @@
 var VERSION_CHECK_FUNCTION_MAP = {
     "Shockwave Flash": shockwave_flash,
     "Widevine Content Decryption Module": widevine_content_decryption_module
-}
+};
 
 function get_plugins() {
     var plugin_info_array = [];
@@ -20,7 +20,7 @@ function extractPluginInfo(pluginObj) {
     console.log(pluginObj);
     plugin_name = pluginObj.name;
     plugin_description = pluginObj.description;
-    plugin_version = ""
+    plugin_version = "";
 
     // デバッグ用----------------------------------------------------------------------------------------
     // document.write(plugin_name + "<br>");
