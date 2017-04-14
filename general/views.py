@@ -2,18 +2,7 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import json
-import subprocess
-
-SEARCHSPLOIT_PATH = "/opt/exploit-database/searchsploit"
-
-
-def search(plugin_name):
-    cmd = "{} -j {}".format(SEARCHSPLOIT_PATH, plugin_name)
-
-    p = subprocess.run(cmd.split(), stdout=subprocess.PIPE)
-    result = p.stdout.decode('utf-8')
-    return result
-
+from lib.searchsploit_pywrap.searchsploit_pywrap import search
 
 class TopView(generic.TemplateView):
     template_name = "top.html"
@@ -22,31 +11,30 @@ class TopView(generic.TemplateView):
 class ResultView(generic.TemplateView):
     template_name = "result.html"
 
+    # search_word is made of name and version ==> "name version"
+    def buildSearchWord(self, name, version):
+        return "{} {}".format(name, version)
+
     def post(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
 
-        datas = json.loads(request.POST.get("plugin_info"))
-        l_name = []
-        l_version = []
-        l_result = []
+        plugins_info_list = json.loads(request.POST.get("plugin_info"))
 
-        for data in datas:
-            for key, value in data.items():
-                if key == "name":
-                    l_name.append(value)
-                elif key == "version":
-                    l_version.append(value)
-                else:
-                    print("<!> error: data")
-
-        for name in l_name:
+        result_list = []
+        for plugin_info_dict in plugins_info_list:
             try:
-                result = json.loads(search(name))
-                l_result.append(result.get("RESULTS"))
+                name = plugin_info_dict.get("name")
+                version = plugin_info_dict.get("version")
+
+                # get result of exploit_db
+                search_word = self.buildSearchWord(name, version)
+                search_result = search(search_word).get("RESULTS")
+                result_list.append([name, version, search_result])
+
             except:
                 print("<!> error: searchsploit")
 
-        context['l_plugins'] = zip(l_name, l_version, l_result)
+        context['l_plugins'] = result_list
         return self.render_to_response(context)
 
     @method_decorator(csrf_exempt)
