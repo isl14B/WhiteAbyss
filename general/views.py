@@ -26,6 +26,7 @@ class ResultView(generic.TemplateView):
                 name = plugin_info_dict.get("name")
                 version = plugin_info_dict.get("version")
 
+                # name, version = 'flash', '24.0' #デモ用の情報
                 # get result of exploit_db
                 search_word = self.buildSearchWord(name, version)
                 search_result = search(search_word).get("RESULTS")
