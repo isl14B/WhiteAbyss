@@ -5,11 +5,12 @@
 
     結果を表示<br><br>
 
-    {% for name, version, result in l_plugins %}
+    {% for name, version, search_result in l_plugins %}
         [{{ name }}, {{ version }}]<br>
-        result = {{ result }}<br>
-
-        <br>
+        result = {% for i in search_result%}
+            {{ i.Exploit }}<br>
+            {{ i.Path }}<br>
+        {% endfor %}
     {% endfor %}
 
 {% endblock %}
