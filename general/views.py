@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 import json
 from lib.searchsploit_pywrap.searchsploit_pywrap import search
 
+
 class TopView(generic.TemplateView):
     template_name = "top.html"
 
@@ -35,7 +36,11 @@ class ResultView(generic.TemplateView):
             except:
                 print("<!> error: searchsploit")
 
-        context['l_plugins'] = result_list
+        result_list[0][2] = ["aaa", "bbb", "CCC"]
+        result_list[1][2] = ["ddd", "eee"]
+        print(result_list)
+        context["result_list"] = result_list
+        context["plugin_num"] = len(result_list)
         return self.render_to_response(context)
 
     @method_decorator(csrf_exempt)
