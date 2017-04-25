@@ -1,14 +1,48 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'WhiteAbyss/css/bootstrap.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'WhiteAbyss/css/animate.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'WhiteAbyss/css/styles.css' %}" />
+{% endblock %}
+
 {% block content %}
-    <h1>Top画面</h1>
+	<header class="hero">
+			<div class="carousel-cell" style="background-image: url({% static "WhiteAbyss/img/bg01.jpg" %});">
+				<div class="hero-bg">
+					<div class="container">
+							<div class="col-md-12 text-center">
+								<h1 class="wp1">Title</h1>
+								<a href="#" class="btn primary wp2" onclick="get_plugins()">Diagnose</a>
+							</div>
+					</div>
+				</div>
+		</div>
+	</header>
 
-    <button type="button" onclick="location.href='/admin'">adminページ</button>
+	<section class="collective has-padding" id="intro">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<h4>Description of this site.</h4>
+				</div>
+				<div class="col-md-9">
+					<p>This site will diagnose your browser's vulnerability...</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    <br><br>
-    djangoにpostする<br>
     <button type="submit" value="main" onclick="get_plugins()">診断</button>
 
+
     <script type="text/javascript" src="{% static 'WhiteAbyss/js/plugin_detection/main.js' %}"></script>
+	<script>
+	window.jQuery || document.write('<script src="{% static 'WhiteAbyss/js/min/jquery-1.11.2.min.js' %}"><\/script>')
+	</script>
+	<script src="{% static 'WhiteAbyss/js/min/bootstrap.min.js'%}"></script>
+	<script src="{% static 'WhiteAbyss/js/min/jquery.waypoints.min.js'%}"></script>
+	<script src="{% static 'WhiteAbyss/js/min/scripts-min.js'%}"></script>
+    <script src="{% static 'WhiteAbyss/js/min/modernizr-2.8.3-respond-1.4.2.min.js'%}"></script>
 {% endblock %}
