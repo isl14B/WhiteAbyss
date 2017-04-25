@@ -14,14 +14,14 @@
 .vulnerabilityClass {
     color: #fff;
     text-decoration: none;
-    background-color: #33aa33;
+    background-color: #3333aa;
     display: block;
-    width: 100px;
-    height: 100px;
-    line-height: 50px;
-    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    /* 円形にする */
+    /*border-radius: 50%;*/
     transition: all 1s ease;
     -webkit-transition: all 1s ease;
-    /*position:relative;*/
+    position:relative;
     z-index: -1;
 }

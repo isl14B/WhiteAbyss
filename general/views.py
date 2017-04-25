@@ -27,7 +27,10 @@ class ResultView(generic.TemplateView):
                 name = plugin_info_dict.get("name")
                 version = plugin_info_dict.get("version")
 
-                # name, version = 'flash', '24.0' #デモ用の情報
+                # デバッグ用
+                # if name == "Shockwave Flash":
+                #     name = "flash"
+                #     version = "24.0.0.186"
                 # get result of exploit_db
                 search_word = self.buildSearchWord(name, version)
                 search_result = search(search_word).get("RESULTS")
@@ -36,9 +39,6 @@ class ResultView(generic.TemplateView):
             except:
                 print("<!> error: searchsploit")
 
-        result_list[0][2] = ["aaa", "bbb", "CCC"]
-        result_list[1][2] = ["ddd", "eee"]
-        print(result_list)
         context["result_list"] = result_list
         context["plugin_num"] = len(result_list)
         return self.render_to_response(context)
