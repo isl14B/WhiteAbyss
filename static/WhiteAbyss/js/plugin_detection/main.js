@@ -17,7 +17,7 @@ function get_plugins() {
 
 // プラグインの情報からバージョン情報を抽出して、辞書型で返す
 function extractPluginInfo(pluginObj) {
-    console.log(pluginObj);
+    // console.log(pluginObj);
     plugin_name = pluginObj.name;
     plugin_description = pluginObj.description;
     plugin_version = "";
