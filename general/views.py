@@ -28,9 +28,8 @@ class ResultView(generic.TemplateView):
                 version = plugin_info_dict.get("version")
 
                 # デバッグ用
-                # if name == "Shockwave Flash":
-                #     name = "flash"
-                #     version = "24.0.0.186"
+                if name == "Shockwave Flash":
+                    name ,version = 'flash', "24.0.0.186"
                 # get result of exploit_db
                 search_word = self.buildSearchWord(name, version)
                 search_result = search(search_word).get("RESULTS")
