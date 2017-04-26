@@ -12,7 +12,6 @@
     {% for name, version, search_result in result_list %}
         <div id="plugin_{{ forloop.counter }}" class="pluginClass">
             {{ name }}
-        </div>
 
         <div id="selection_{{ forloop.counter }}">
         {% for i in search_result %}
@@ -22,6 +21,7 @@
             </div>
         {% endfor %}
         </div>
+    </div>
     {% endfor %}
 
 <script>
