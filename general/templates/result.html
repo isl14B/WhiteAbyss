@@ -3,7 +3,7 @@
 
 {% block extrahead %}
     <script type="text/javascript" src="{% static 'WhiteAbyss/js/jquery-3.2.0.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'WhiteAbyss/css/style.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'WhiteAbyss/css/style.css' %}" type="text/css">
 {% endblock %}
 
 {% block content %}
@@ -17,7 +17,6 @@
         {% for i in search_result %}
             <div class="vulnerabilityClass" id={{ forloop.counter }}>
                 {{ i.Exploit }}
-{#                {{ i.Path }}#}
             </div>
         {% endfor %}
         </div>
