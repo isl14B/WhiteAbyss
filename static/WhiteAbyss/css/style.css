@@ -10,6 +10,7 @@
     transition: all 1s ease;
     -webkit-transition: all 1s ease;
     position:relative;
+    text-align: center;
 }
 .vulnerabilityClass {
     color: #fff;
@@ -24,4 +25,16 @@
     -webkit-transition: all 1s ease;
     position:relative;
     z-index: -1;
+    font-size: 10px;
+    text-align: center;
+}
+.pluginClass p{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.vulnerabilityClass p{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }

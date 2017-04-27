@@ -11,12 +11,12 @@
 
     {% for name, version, search_result in result_list %}
         <div id="plugin_{{ forloop.counter }}" class="pluginClass">
-            {{ name }}
+            <p>{{ name }}</p>
 
         <div id="selection_{{ forloop.counter }}">
         {% for i in search_result %}
             <div class="vulnerabilityClass" id={{ forloop.counter }}>
-                {{ i.Exploit }}
+                <p>{{ i.Exploit }}</p>
             </div>
         {% endfor %}
         </div>
