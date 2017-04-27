@@ -1,16 +1,62 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'WhiteAbyss/js/jquery-3.2.0.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'WhiteAbyss/css/style.css' %}" type="text/css">
+{% endblock %}
 
 {% block content %}
-    <h1>Result画面</h1>
+    <h1>診断結果</h1>
 
-    結果を表示<br><br>
+    {% for name, version, search_result in result_list %}
+        <div id="plugin_{{ forloop.counter }}" class="pluginClass">
+            {{ name }}
 
-    {% for name, version, search_result in l_plugins %}
-        [{{ name }}, {{ version }}]<br>
-        result = {% for i in search_result%}
-            {{ i.Exploit }}<br>
-            {{ i.Path }}<br>
+        <div id="selection_{{ forloop.counter }}">
+        {% for i in search_result %}
+            <div class="vulnerabilityClass" id={{ forloop.counter }}>
+                {{ i.Exploit }}
+            </div>
         {% endfor %}
+        </div>
+    </div>
     {% endfor %}
 
+<script>
+    // 最初に脆弱性情報要素の位置を，プラグイン要素の位置に移動
+    window.onload = function() {
+        for (var i = 1; i <={{ plugin_num }}; i++) {
+            var pos = $("#plugin_" + i).offset().top;
+            var select = "#selection_" + i + ">div";
+            var vulnerability_flag = false;
+            $(select).each(function (index, elem) {
+                $(elem).offset({top: pos});
+                vulnerability_flag = true;
+            });
+
+            if(vulnerability_flag == true){
+                $("#plugin_" + i).css("background-color", "#f55");
+            }
+        }
+    }
+
+    // num番目のプラグイン要素をクリックした場合，num番目の小要素（脆弱性要素）を横にスライドさせる
+    $(".pluginClass").click(function(){
+        var num = this.id.split("_")[1];
+        setPosFunc(num);
+    });
+
+    function setPosFunc(number){
+        var posNo = 1;
+        var select = "#selection_" + number + ">div";
+        $(select).each(function(index, elem) {
+            var myX = posNo * 150 + "px";
+            $(elem).stop().animate({left: myX});
+            posNo+=1;
+        });
+    }
+</script>
 {% endblock %}
+
+

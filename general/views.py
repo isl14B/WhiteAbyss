@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 import json
 from lib.searchsploit_pywrap.searchsploit_pywrap import search
 
+
 class TopView(generic.TemplateView):
     template_name = "top.html"
 
@@ -26,7 +27,9 @@ class ResultView(generic.TemplateView):
                 name = plugin_info_dict.get("name")
                 version = plugin_info_dict.get("version")
 
-                # name, version = 'flash', '24.0' #デモ用の情報
+                # デバッグ用
+                if name == "Shockwave Flash":
+                    name ,version = 'flash', "24.0.0.186"
                 # get result of exploit_db
                 search_word = self.buildSearchWord(name, version)
                 search_result = search(search_word).get("RESULTS")
@@ -35,7 +38,8 @@ class ResultView(generic.TemplateView):
             except:
                 print("<!> error: searchsploit")
 
-        context['l_plugins'] = result_list
+        context["result_list"] = result_list
+        context["plugin_num"] = len(result_list)
         return self.render_to_response(context)
 
     @method_decorator(csrf_exempt)
