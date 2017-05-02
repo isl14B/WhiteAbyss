@@ -8,6 +8,9 @@
 
 {% block content %}
     <h1>診断結果</h1>
+    <div class="alert-box">
+        脆弱性があるプラグインがあります　最新版にしてください
+    </div>
 
     {% for name, version, search_result in result_list %}
         <div id="plugin_{{ forloop.counter }}" class="pluginClass">
@@ -26,10 +29,13 @@
 <script>
     // 最初に脆弱性情報要素の位置を，プラグイン要素の位置に移動
     window.onload = function() {
+        $("#is_vulnerability").hide();
+
         for (var i = 1; i <={{ plugin_num }}; i++) {
             var pos = $("#plugin_" + i).offset().top;
             var select = "#selection_" + i + ">div";
             var vulnerability_flag = false;
+
             $(select).each(function (index, elem) {
                 $(elem).offset({top: pos});
                 vulnerability_flag = true;
@@ -37,6 +43,8 @@
 
             if(vulnerability_flag == true){
                 $("#plugin_" + i).css("background-color", "#f55");
+                $("#is_vulnerability").show();
+            }else{
             }
         }
     }

@@ -38,3 +38,9 @@
     top: 50%;
     transform: translateY(-50%);
 }
+.alert-box{
+    background-color: #e7efff;
+    color: #1c66fe;
+    margin: 2em 0;
+    padding: 2em;
+}
