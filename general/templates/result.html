@@ -1,16 +1,112 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'WhiteAbyss/js/jquery-3.2.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'WhiteAbyss/css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300" rel="stylesheet" >
+{% endblock %}
 
 {% block content %}
-    <h1>Result画面</h1>
+    <h1>診断結果</h1>
 
-    結果を表示<br><br>
+    <div class="alert-box">
+        <p>脆弱性があるプラグインがあります<br>最新版にアップデートしてください</p>
+    </div>
 
-    {% for name, version, search_result in l_plugins %}
-        [{{ name }}, {{ version }}]<br>
-        result = {% for i in search_result%}
-            {{ i.Exploit }}<br>
-            {{ i.Path }}<br>
+{#    モーダルウィンドウ#}
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="title_vulnerability">Modal Title</h4>
+          </div>
+          <div class="modal-body" id="info_vulnerability">Modal Contents</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+           </div>
+        </div>
+      </div>
+    </div>
+
+{#    プラグイン要素#}
+    {% for name, version, search_result in result_list %}
+        <div id="plugin_{{ forloop.counter }}" class="pluginClass">
+            <p>{{ name }}</p>
+
+{#        脆弱性要素#}
+        <div id="selection_{{ forloop.counter }}">
+        {% for i in search_result %}
+            <div class="vulnerabilityClass" name="template" id="{{ forloop.counter }}"
+                 data-toggle="modal" data-target="#myModal">
+                <p>{{ i.Exploit }}</p>
+            </div>
         {% endfor %}
+        </div>
+    </div>
     {% endfor %}
 
+<script>
+    var vulnerability_info_list = {{ vulnerability_info_list|safe }};
+    var vulnerability_title_list = {{ vulnerability_title_list|safe }};
+
+    // 最初に脆弱性情報要素の位置を，プラグイン要素の位置に移動
+    window.onload = function() {
+        var counter = 0;
+        $("#is_vulnerability").hide();
+
+        for (var i = 1; i <={{ plugin_num }}; i++) {
+            var pos = $("#plugin_" + i).offset().top;
+            var select = "#selection_" + i + ">div";
+            var vulnerability_flag = false;
+
+            $(select).each(function (index, elem) {
+                $(elem).offset({top:pos}).attr("name", counter++);
+                vulnerability_flag = true;
+                $("#plugin_" + i).css("background-color", "#f55");
+                $("#is_vulnerability").show();
+            });
+
+            $(select).hide();
+        }
+
+        $(".alert-box").fadeIn(1000);
+    };
+
+    // num番目のプラグイン要素をクリックした場合，num番目の小要素（脆弱性要素）を横にスライドさせる
+    $(".pluginClass").click(function(){
+        setPosFunc(this.id.split("_")[1]);
+    });
+
+    // 脆弱性情報要素をクリックした場合, モーダルウィンドウで詳細を表示する
+    $(".vulnerabilityClass").click(function(){
+        $("#info_vulnerability").html(vulnerability_info_list[this.attributes["name"].value]);
+        $("#title_vulnerability").html(vulnerability_title_list[this.attributes["name"].value]);
+    });
+
+    // 脆弱性情報要素のアニメーション
+    function setPosFunc(number){
+        var posNo = 1;
+        var select = "#selection_" + number + ">div";
+        $(select).show();
+        $(select).each(function(index, elem) {
+            var myX = posNo * 200 + "px";
+            $(elem).stop().animate({left: myX});
+            posNo+=1;
+        });
+    }
+
+    // 脆弱性情報要素をクリックした場合, モーダルウィンドウで詳細を表示する
+    $(".vulnerabilityClass").click(function(){
+        $("#info_vulnerability").html(vulnerability_info_list[this.attributes["name"].value]);
+        $("#title_vulnerability").html(vulnerability_title_list[this.attributes["name"].value]);
+    });
+
+</script>
 {% endblock %}
+
+
