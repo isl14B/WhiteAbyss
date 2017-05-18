@@ -39,6 +39,7 @@ class ResultView(generic.TemplateView):
                 #     name, version = 'flash', "24.0.0.186"
                 # if name == "QuickTime Plug-in 7.7.3":
                 #     name, version = 'flash', "24.0.0.186"
+
                 # get result of exploit_db
                 search_word = self.buildSearchWord(name, version)
                 search_result = search(search_word).get("RESULTS")
@@ -47,6 +48,9 @@ class ResultView(generic.TemplateView):
                     vulnerability_title_list.update({index: title})
                     with open(vul.get("Path"), "r") as f:
                         vulnerability_info_list.update({index: f.read().replace("\n", "<BR>")})
+
+                    # -を使わないように修正
+                    vul["EDB_ID"] = vul.pop("EDB-ID")
                 result_list.append([name, version, search_result])
 
             except:

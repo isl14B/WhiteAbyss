@@ -43,7 +43,7 @@
         {% for i in search_result %}
             <div class="vulnerabilityClass" name="template" id="{{ forloop.counter }}"
                  data-toggle="modal" data-target="#myModal">
-                <p>{{ i.Exploit }}</p>
+                <p>EDB-ID:<br>{{ i.EDB_ID }}</p>
             </div>
         {% endfor %}
         </div>

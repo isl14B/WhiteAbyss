@@ -8,11 +8,6 @@ h1{
     padding-top: 15px;
     padding-bottom: 30px;
     left: 40%;
-    /*top: 0px;*/
-  /*right: 0px;*/
-  /*bottom: 0px;*/
-  /*left: 0px;*/
-    /*margin: auto !important;*/
 }
 p{
     font-family: 'Alegreya Sans SC', sans-serif;
@@ -41,7 +36,6 @@ p{
 .vulnerabilityClass {
     color: #fff;
     text-decoration: none;
-    /*background-color: #3333aa;*/
     background-color: #55f;
     display: block;
     width: 150px;
@@ -54,7 +48,7 @@ p{
     text-align: center;
 }
 .vulnerabilityClass p{
-    font-size: 15px;
+    font-size: 20px;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
