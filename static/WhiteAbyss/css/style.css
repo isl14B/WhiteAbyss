@@ -7,7 +7,12 @@ h1{
     position: relative;
     padding-top: 15px;
     padding-bottom: 30px;
-    left: 10%;
+    left: 40%;
+    /*top: 0px;*/
+  /*right: 0px;*/
+  /*bottom: 0px;*/
+  /*left: 0px;*/
+    /*margin: auto !important;*/
 }
 p{
     font-family: 'Alegreya Sans SC', sans-serif;
@@ -64,6 +69,8 @@ p{
     opacity: 0.85;
     border-radius: 10px;
     display: none;
+    position: relative;
+    left: 20%;
 }
 .alert-box p{
     font-size: 17px;
