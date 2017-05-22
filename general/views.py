@@ -31,10 +31,11 @@ class ResultView(generic.TemplateView):
                 version = plugin_info_dict.get("version")
 
                 # デバッグ用
-                if name == "Shockwave Flash":
-                    name ,version = 'flash', "24.0.0.186"
-                if name == "Java Applet Plug-in":
-                    name, version = 'flash', "24.0.0.186"
+                # if name == "Shockwave Flash":
+                #     name ,version = 'flash', "24.0.0.186"
+                # if name == "Java Applet Plug-in":
+                #     name, version = 'flash', "24.0.0.186"
+                
                 # if name == "Widevine Content Decryption Module":
                 #     name, version = 'flash', "24.0.0.186"
                 # if name == "QuickTime Plug-in 7.7.3":
