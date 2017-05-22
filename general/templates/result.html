@@ -51,8 +51,6 @@
     {% endfor %}
 
 <script>
-    var vulnerability_info_list = {{ vulnerability_info_list|safe }};
-    var vulnerability_title_list = {{ vulnerability_title_list|safe }};
 
     // 最初に脆弱性情報要素の位置を，プラグイン要素の位置に移動
     window.onload = function() {
@@ -84,12 +82,6 @@
         setPosFunc(this.id.split("_")[1]);
     });
 
-    // 脆弱性情報要素をクリックした場合, モーダルウィンドウで詳細を表示する
-    $(".vulnerabilityClass").click(function(){
-        $("#info_vulnerability").html(vulnerability_info_list[this.attributes["name"].value]);
-        $("#title_vulnerability").html(vulnerability_title_list[this.attributes["name"].value]);
-    });
-
     // 脆弱性情報要素のアニメーション
     function setPosFunc(number){
         var posNo = 1;
@@ -104,9 +96,18 @@
 
     // 脆弱性情報要素をクリックした場合, モーダルウィンドウで詳細を表示する
     $(".vulnerabilityClass").click(function(){
-        $("#info_vulnerability").html(vulnerability_info_list[this.attributes["name"].value]);
-        $("#title_vulnerability").html(vulnerability_title_list[this.attributes["name"].value]);
+{#        alert({{ vulnerability_info_list|safe }}[this.id - 1]);#}
+{#        alert("!!!");#}
+
+        $("#title_vulnerability").html({{ vulnerability_title_list|safe }}[this.id - 1]);
+        $("#info_vulnerability").html({{ vulnerability_info_list|safe }}[this.id - 1]);
     });
+
+{#    // 脆弱性情報要素をクリックした場合, モーダルウィンドウで詳細を表示する#}
+{#    $(".vulnerabilityClass").click(function(){#}
+{#        $("#info_vulnerability").html(vulnerability_info_list[this.attributes["name"].value]);#}
+{#        $("#title_vulnerability").html(vulnerability_title_list[this.attributes["name"].value]);#}
+{#    });#}
 
 </script>
 {% endblock %}
