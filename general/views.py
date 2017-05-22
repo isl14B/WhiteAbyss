@@ -32,7 +32,7 @@ class ResultView(generic.TemplateView):
 
                 # デバッグ用
                 # if name == "Shockwave Flash":
-                #     name ,version = 'flash', "24.0.0.186"
+                #     name, version = 'flash', "24.0.0.186"
                 # if name == "Java Applet Plug-in":
                 #     name, version = 'flash', "24.0.0.186"
                 

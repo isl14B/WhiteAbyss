@@ -57,12 +57,12 @@
     // 最初に脆弱性情報要素の位置を，プラグイン要素の位置に移動
     window.onload = function() {
         var counter = 0;
+        var vulnerability_flag = false;
         $("#is_vulnerability").hide();
 
         for (var i = 1; i <={{ plugin_num }}; i++) {
             var pos = $("#plugin_" + i).offset().top;
             var select = "#selection_" + i + ">div";
-            var vulnerability_flag = false;
 
             $(select).each(function (index, elem) {
                 $(elem).offset({top:pos}).attr("name", counter++);
@@ -74,7 +74,9 @@
             $(select).hide();
         }
 
-        $(".alert-box").fadeIn(1000);
+{#        if(vulnerability_flag) {#}
+            $(".alert-box").fadeIn(1000);
+{#        }#}
     };
 
     // num番目のプラグイン要素をクリックした場合，num番目の小要素（脆弱性要素）を横にスライドさせる
