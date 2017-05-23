@@ -4,7 +4,7 @@
 {% block extrahead %}
     <script type="text/javascript" src="{% static 'WhiteAbyss/js/jquery-3.2.0.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'WhiteAbyss/css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'WhiteAbyss/css/style_result.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300" rel="stylesheet" >
 {% endblock %}
@@ -16,7 +16,7 @@
         <p>脆弱性があるプラグインがあります<br>最新版にアップデートしてください</p>
     </div>
 
-{#    モーダルウィンドウ#}
+    <!-- モーダルウィンドウ -->
     <div class="modal fade" id="myModal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -33,12 +33,12 @@
       </div>
     </div>
 
-{#    プラグイン要素#}
+    <!-- プラグイン要素 -->
     {% for name, version, search_result in result_list %}
         <div id="plugin_{{ forloop.counter }}" class="pluginClass">
             <p>{{ name }}</p>
 
-{#        脆弱性要素#}
+        <!-- 脆弱性要素 -->
         <div id="selection_{{ forloop.counter }}">
         {% for i in search_result %}
             <div class="vulnerabilityClass" name="template" id="{{ forloop.counter }}"
@@ -51,13 +51,12 @@
     {% endfor %}
 
 <script>
-
-    // 最初に脆弱性情報要素の位置を，プラグイン要素の位置に移動
     window.onload = function() {
         var counter = 0;
         var vulnerability_flag = false;
         $("#is_vulnerability").hide();
 
+        // 最初に脆弱性情報要素の位置を，プラグイン要素の位置に移動
         for (var i = 1; i <={{ plugin_num }}; i++) {
             var pos = $("#plugin_" + i).offset().top;
             var select = "#selection_" + i + ">div";
@@ -68,10 +67,10 @@
                 $("#plugin_" + i).css("background-color", "#f55");
                 $("#is_vulnerability").show();
             });
-
             $(select).hide();
         }
 
+        // 脆弱性警告文の表示
         if(vulnerability_flag) {
             $(".alert-box").fadeIn(1000);
         }
@@ -96,18 +95,9 @@
 
     // 脆弱性情報要素をクリックした場合, モーダルウィンドウで詳細を表示する
     $(".vulnerabilityClass").click(function(){
-{#        alert({{ vulnerability_info_list|safe }}[this.id - 1]);#}
-{#        alert("!!!");#}
-
         $("#title_vulnerability").html({{ vulnerability_title_list|safe }}[this.id - 1]);
         $("#info_vulnerability").html({{ vulnerability_info_list|safe }}[this.id - 1]);
     });
-
-{#    // 脆弱性情報要素をクリックした場合, モーダルウィンドウで詳細を表示する#}
-{#    $(".vulnerabilityClass").click(function(){#}
-{#        $("#info_vulnerability").html(vulnerability_info_list[this.attributes["name"].value]);#}
-{#        $("#title_vulnerability").html(vulnerability_title_list[this.attributes["name"].value]);#}
-{#    });#}
 
 </script>
 {% endblock %}
