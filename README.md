@@ -1,28 +1,28 @@
 # WhiteAbyss
 脆弱性診断Webアプリ
 
-## ブランチの命名やコミット方法について
-* ブランチ  
-ブランチ名は以下の規則で生成する  
-feat/~~~   機能の追加  
-fix/~~~     バグの修正  
-update/~~~  機能の修正、更新  
-remove/~~~  機能の削除  
-
-~の部分には、動詞＋名詞（大頭文字）の形で書く  
-例）feat/registerUser  
-
-* コミット  
-[commit type]commit name  という記述で書く  
-commit typeには、コミットの種類を書く  
-add, fix, update, remove, refact  
-
 ## Abstract
 ユーザのブラウザのプラグインやツールなどの脆弱性を調べる
 
-## How to use
+## Setup
+###　必要なモジュール
+- python 3.5.1  
+- django 1.10.5  
 
-## 画面
+### exploit-db
+Linuxの場合， 以下のURLのHow to Install SearchSploit - Gitの項目の手順から， exploit-databaseをインストールする  
+https://www.exploit-db.com/searchsploit/#installgit  
+
+## Start
+manage.pyがあるディレクトリで，　  
+```
+$ python manage.py runserver 0.0.0.0:8000  
+```
+
+- （接続する場合） localhost:8000
+- （外部から接続する場合） {IPアドレス}:8000
+
+## Image
 * トップ画面
 ![image01.jpeg](https://raw.githubusercontent.com/isl14B/WhiteAbyss/develop/screen_shot/image01.jpeg)
 
